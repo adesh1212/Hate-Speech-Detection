@@ -6,7 +6,7 @@ from nltk.corpus import stopwords
 from nltk.stem import PorterStemmer
 
 # Load the vectorizer and model
-with open('../pythonProject/vectorizer.pkl', 'rb') as vectorizer_file:
+with open('vectorizer.pkl', 'rb') as vectorizer_file:
     cv = pickle.load(vectorizer_file)
 with open('model.pkl', 'rb') as model_file:
     clf_gini = pickle.load(model_file)
