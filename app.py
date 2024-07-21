@@ -6,19 +6,17 @@ import string
 from nltk.corpus import stopwords
 from nltk.stem import PorterStemmer
 
-nltk.download('stopwords')
-nltk.download('punkt')
+# Ensure NLTK data is available
+nltk.data.path.append('./nltk_data')
+
+# Load stopwords and punkt tokenizer
+stopwords.words('english')
 
 # Load the vectorizer and model
 with open('vectorizer.pkl', 'rb') as vectorizer_file:
     cv = pickle.load(vectorizer_file)
 with open('model.pkl', 'rb') as model_file:
     clf_gini = pickle.load(model_file)
-
-
-
-
-stopwords = stopwords.words('english')
 
 # Define your text cleaning function
 def clean(text):
@@ -45,7 +43,7 @@ def clean(text):
     text = re.sub('\w*\d\w*', '', text)
 
     # Remove stopwords
-    text = [word for word in text.split(' ') if word not in stopwords]
+    text = [word for word in text.split(' ') if word not in stopwords.words('english')]
     text = ' '.join(text)
 
     # Apply stemming to words
@@ -75,6 +73,3 @@ if st.button("Predict"):
         st.markdown(f"<h3 style='color:green;'>Prediction for the input text: {prediction}</h3>", unsafe_allow_html=True)
     else:
         st.markdown(f"<h3 style='color:red;'>Prediction for the input text: {prediction}</h3>", unsafe_allow_html=True)
-
-# To run the app, use the following command in your terminal
-# streamlit run app.py
