@@ -1,15 +1,22 @@
 import streamlit as st
 import pickle
 import re
+import nltk
 import string
 from nltk.corpus import stopwords
 from nltk.stem import PorterStemmer
+
+nltk.download('stopwords')
+nltk.download('punkt')
 
 # Load the vectorizer and model
 with open('vectorizer.pkl', 'rb') as vectorizer_file:
     cv = pickle.load(vectorizer_file)
 with open('model.pkl', 'rb') as model_file:
     clf_gini = pickle.load(model_file)
+
+
+
 
 stopwords = stopwords.words('english')
 
